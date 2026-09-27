@@ -17,8 +17,8 @@ const metrics = [
     label: 'Projects Delivered',
     color: 'sky',
     // Oscillates towards card 2, then recoils left
-    xAnimation: [0, 22, -18, 0],
-    rotateAnimation: [0, 2, -2, 0],
+    xAnimation: [0, 15, -22, 0],
+    rotateAnimation: [0, 0, 0, 0],
     delay: 0,
     theme: {
       card: 'bg-white/95 border-sky-200/80 shadow-sky-500/10 hover:border-sky-400',
@@ -32,8 +32,8 @@ const metrics = [
     label: 'Years Experience',
     color: 'blue',
     // Oscillates towards card 1 and 3 (head-on rebound simulation)
-    xAnimation: [0, -22, 20, 0],
-    rotateAnimation: [0, -2.5, 2, 0],
+    xAnimation: [0, 10, -22, 0],
+    rotateAnimation: [0, 0, 0, 0],
     delay: 0.25,
     theme: {
       card: 'bg-white/95 border-blue-200/80 shadow-blue-500/10 hover:border-blue-400',
@@ -47,8 +47,8 @@ const metrics = [
     label: 'Full-Stack Delivery',
     color: 'indigo',
     // Oscillates inward towards card 2 and 4
-    xAnimation: [0, 20, -22, 0],
-    rotateAnimation: [0, 2, -2.5, 0],
+    xAnimation: [0, 12, -22, 0],
+    rotateAnimation: [0, 0, 0, 0],
     delay: 0.15,
     theme: {
       card: 'bg-white/95 border-indigo-200/80 shadow-indigo-500/10 hover:border-indigo-400',
@@ -62,8 +62,8 @@ const metrics = [
     label: 'Delivery Success',
     color: 'emerald',
     // Recoils against card 3
-    xAnimation: [0, -18, 22, 0],
-    rotateAnimation: [0, -2, 2, 0],
+    xAnimation: [0, 15, 22, 0],
+    rotateAnimation: [0, 0, 0, 0],
     delay: 0.4,
     theme: {
       card: 'bg-white/95 border-emerald-200/80 shadow-emerald-500/10 hover:border-emerald-400',
