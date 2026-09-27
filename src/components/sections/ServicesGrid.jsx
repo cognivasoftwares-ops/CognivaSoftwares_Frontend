@@ -14,6 +14,7 @@ import { motion } from 'framer-motion';
 
 const services = [
   {
+    slug: 'web-development',
     icon: Globe,
     title: 'Web Application Development',
     desc: 'Scalable, responsive web portals built with React, Spring Boot, and modern cloud microservices architecture.',
@@ -31,6 +32,7 @@ const services = [
     }
   },
   {
+    slug: 'mobile-app-development',
     icon: Smartphone,
     title: 'Mobile App Development',
     desc: 'High-performance native iOS & Android applications and unified cross-platform Flutter solutions.',
@@ -48,6 +50,7 @@ const services = [
     }
   },
   {
+    slug: 'custom-software',
     icon: Code2,
     title: 'Custom Software Engineering',
     desc: 'Bespoke enterprise backends, automated workflow engines, and complex third-party system integrations.',
@@ -65,10 +68,11 @@ const services = [
     }
   },
   {
+    slug: 'enterprise-solutions',
     icon: ShieldCheck,
-    title: 'E-Governance & Public Portals',
-    desc: 'Secure citizen services platforms, audit-compliant municipal workflows, and enterprise document systems.',
-    tags: ['Security', 'RBAC', 'Compliance'],
+    title: 'Enterprise Solutions',
+    desc: 'ERP and CRM implementation, legacy modernization, and secure enterprise-grade platforms for large organizations.',
+    tags: ['ERP', 'CRM', 'Compliance'],
     theme: {
       cardBg: 'bg-slate-900/80 hover:bg-slate-900',
       border: 'border-emerald-500/20 hover:border-emerald-400/60',
@@ -82,6 +86,7 @@ const services = [
     }
   },
   {
+    slug: 'ui-ux-design',
     icon: Palette,
     title: 'UI/UX & Product Design',
     desc: 'Research-backed user interfaces, rapid interactive prototypes, design systems, and conversion-focused UX.',
@@ -99,6 +104,7 @@ const services = [
     }
   },
   {
+    slug: 'cloud-devops',
     icon: Cloud,
     title: 'Cloud DevOps & Infrastructure',
     desc: 'Automated CI/CD pipelines, containerization with Docker & Kubernetes, and scalable AWS cloud hosting.',
@@ -203,7 +209,7 @@ export default function ServicesGrid() {
                 {/* Bottom Action Link */}
                 <div className={`mt-8 border-t pt-5 ${t.divider}`}>
                   <Link
-                    to="/services"
+                    to={`/services/${service.slug}`}
                     className={`inline-flex items-center gap-2 text-sm font-bold transition-colors ${t.action}`}
                   >
                     <span>Explore Service</span>

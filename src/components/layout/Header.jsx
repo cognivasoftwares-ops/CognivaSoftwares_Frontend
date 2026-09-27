@@ -7,12 +7,12 @@ export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
 
   const services = [
-    { title: 'Web Development', desc: 'Custom portals, React & full-stack apps', path: '/services' },
-    { title: 'Mobile App Development', desc: 'Native & cross-platform iOS/Android', path: '/services' },
-    { title: 'Custom Software', desc: 'Enterprise business logic & automations', path: '/services' },
-    { title: 'Enterprise Solutions', desc: 'ERP, CRM, and cloud integrations', path: '/services' },
-    { title: 'UI/UX Design', desc: 'Modern interfaces and product prototyping', path: '/services' },
-    { title: 'Cloud & DevOps', desc: 'CI/CD pipelines, Docker & AWS hosting', path: '/services' },
+    { title: 'Web Development', desc: 'Custom portals, React & full-stack apps', path: '/services/web-development' },
+    { title: 'Mobile App Development', desc: 'Native & cross-platform iOS/Android', path: '/services/mobile-app-development' },
+    { title: 'Custom Software', desc: 'Enterprise business logic & automations', path: '/services/custom-software' },
+    { title: 'Enterprise Solutions', desc: 'ERP, CRM, and cloud integrations', path: '/services/enterprise-solutions' },
+    { title: 'UI/UX Design', desc: 'Modern interfaces and product prototyping', path: '/services/ui-ux-design' },
+    { title: 'Cloud & DevOps', desc: 'CI/CD pipelines, Docker & AWS hosting', path: '/services/cloud-devops' },
   ];
 
   return (
