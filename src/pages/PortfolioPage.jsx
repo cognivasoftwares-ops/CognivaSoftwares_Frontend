@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { ArrowRight, Quote, Mail, Phone, MapPin } from 'lucide-react';
-import { projects } from '../data/projects';
-
-const accentTheme = {
-  blue: { gradient: 'from-sky-500 to-blue-700', badge: 'bg-sky-50 text-sky-700 ring-sky-700/10', tag: 'bg-sky-50 text-sky-700' },
-  emerald: { gradient: 'from-emerald-500 to-teal-700', badge: 'bg-emerald-50 text-emerald-700 ring-emerald-700/10', tag: 'bg-emerald-50 text-emerald-700' },
-  amber: { gradient: 'from-amber-500 to-orange-600', badge: 'bg-amber-50 text-amber-700 ring-amber-700/10', tag: 'bg-amber-50 text-amber-700' },
-  indigo: { gradient: 'from-indigo-500 to-violet-700', badge: 'bg-indigo-50 text-indigo-700 ring-indigo-700/10', tag: 'bg-indigo-50 text-indigo-700' },
-};
+import ProjectShowcase from '../components/portfolio/ProjectShowcase';
 
 const testimonials = [
   {
@@ -28,48 +19,6 @@ const testimonials = [
     role: 'Product Owner · FinTech Partner',
   },
 ];
-
-function ProjectCard({ project, index }) {
-  const theme = accentTheme[project.accent] || accentTheme.blue;
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="group flex flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
-    >
-      <div className={`h-48 w-full bg-gradient-to-br ${theme.gradient}`} />
-
-      <div className="flex flex-1 flex-col p-8">
-        <span className={`inline-block w-fit rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ring-1 ring-inset ${theme.badge}`}>
-          {project.industry}
-        </span>
-
-        <h3 className="mt-4 text-xl font-bold tracking-tight text-slate-900">{project.title}</h3>
-        <p className="mt-3 text-sm leading-relaxed text-slate-600">{project.description}</p>
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span key={tag} className={`rounded-md px-2.5 py-1 text-[11px] font-semibold ${theme.tag}`}>
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-auto pt-6">
-          <Link
-            to={`/portfolio/${project.slug}`}
-            className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 transition group-hover:text-sky-700"
-          >
-            View Case Study
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 function ContactBanner() {
   const [submitted, setSubmitted] = useState(false);
@@ -183,16 +132,8 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Project Grid */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {projects.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Project Showcase */}
+      <ProjectShowcase />
 
       {/* Testimonials */}
       <section className="border-t border-slate-100 bg-slate-50/60 py-20">
