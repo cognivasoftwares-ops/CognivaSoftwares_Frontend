@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import RootLayout from '../components/layout/RootLayout';
 import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
+import PortfolioPage from '../pages/PortfolioPage';
+import CaseStudyPage from '../pages/CaseStudyPage';
 
 export default function AppRoutes() {
   return (
@@ -15,7 +17,8 @@ export default function AppRoutes() {
 
         <Route path="services" element={<div className="p-16 text-center text-slate-400">Services Page Coming Soon</div>} />
         <Route path="services/:slug" element={<div className="p-16 text-center text-slate-400">Service Detail Page</div>} />
-        <Route path="portfolio" element={<div className="p-16 text-center text-slate-400">Portfolio Page Coming Soon</div>} />
+        <Route path="portfolio" element={<PortfolioPage />} />
+        <Route path="portfolio/:slug" element={<CaseStudyPage />} />
         <Route path="contact" element={<div className="p-16 text-center text-slate-400">Contact Page Coming Soon</div>} />
         <Route path="*" element={<div className="p-16 text-center text-slate-400">404 - Page Not Found</div>} />
       </Route>
