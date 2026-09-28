@@ -9,11 +9,11 @@ export default function SectionNavigation({
   onNext,
 }) {
   return (
-    <div className="relative w-full rounded-2xl border border-slate-800/80 bg-[#070b14]/80 px-6 py-3 backdrop-blur-md">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        
+    <div className="relative w-full rounded-2xl border border-slate-800/80 bg-[#070b14]/80 px-5 py-2.5 backdrop-blur-md">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
         {/* Horizontal Navigation Tabs */}
-        <div className="flex flex-1 items-center gap-6 overflow-x-auto py-2">
+        <div className="flex flex-1 items-center gap-5 overflow-x-auto py-1">
           {sections.map((item, index) => {
             const isActive = index === activeIndex;
             return (
@@ -54,7 +54,7 @@ export default function SectionNavigation({
         </div>
 
         {/* Scroll Label & Buttons */}
-        <div className="flex shrink-0 items-center justify-between gap-4 border-t border-slate-800/60 pt-3 sm:border-t-0 sm:pt-0">
+        <div className="flex shrink-0 items-center justify-between gap-4 border-t border-slate-800/60 pt-2 sm:border-t-0 sm:pt-0">
           <span className="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">
             NAVIGATE
           </span>

@@ -26,7 +26,7 @@ export default function SectionContent({ section, currentIndex, total }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.08 }}
-        className="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl lg:leading-[1.12]"
+        className="mt-3 text-2xl font-black tracking-tight text-white sm:text-3xl lg:text-4xl lg:leading-[1.12]"
       >
         {section.title}
       </motion.h2>
@@ -37,7 +37,7 @@ export default function SectionContent({ section, currentIndex, total }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.16 }}
-        className="mt-6 max-w-xl text-sm leading-relaxed text-slate-400 sm:text-base"
+        className="mt-3 max-w-xl text-sm leading-relaxed text-slate-400 lg:mt-4"
       >
         {section.description}
       </motion.p>
@@ -48,12 +48,12 @@ export default function SectionContent({ section, currentIndex, total }) {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.24 }}
-        className="mt-8 flex flex-wrap gap-2"
+        className="mt-4 flex flex-wrap gap-2 lg:mt-5"
       >
         {section.tags.map((tag, i) => (
           <span
             key={`${tag}-${i}`}
-            className="rounded-md border border-slate-800 bg-slate-900/60 px-3 py-1.5 text-xs font-medium text-slate-300 backdrop-blur-sm transition-colors hover:border-slate-700 hover:text-white"
+            className="rounded-md border border-slate-800 bg-slate-900/60 px-2.5 py-1 text-[11px] font-medium text-slate-300 backdrop-blur-sm transition-colors hover:border-slate-700 hover:text-white"
           >
             {tag}
           </span>
@@ -66,11 +66,11 @@ export default function SectionContent({ section, currentIndex, total }) {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.3 }}
-        className="mt-10"
+        className="mt-5 lg:mt-6"
       >
         <button
           type="button"
-          className="group inline-flex items-center gap-3 rounded-lg border border-amber-400 bg-amber-400 px-6 py-3.5 text-xs font-bold tracking-widest text-slate-950 uppercase shadow-lg shadow-amber-400/10 transition-all hover:bg-amber-300 hover:shadow-amber-400/20"
+          className="group inline-flex items-center gap-3 rounded-lg border border-amber-400 bg-amber-400 px-5 py-2.5 text-xs font-bold tracking-widest text-slate-950 uppercase shadow-lg shadow-amber-400/10 transition-all hover:bg-amber-300 hover:shadow-amber-400/20"
         >
           <span>Explore Details</span>
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

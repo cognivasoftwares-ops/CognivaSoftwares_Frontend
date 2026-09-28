@@ -66,6 +66,7 @@ export default function TechnologyExperience() {
   const [activeIndex, setActiveIndex] = useState(0);
   const isScrollingRef = useRef(false);
   const containerRef = useRef(null);
+  const isSnappedRef = useRef(false);
 
   const handleNext = useCallback(() => {
     setActiveIndex((prev) => Math.min(prev + 1, sections.length - 1));
@@ -73,6 +74,29 @@ export default function TechnologyExperience() {
 
   const handlePrev = useCallback(() => {
     setActiveIndex((prev) => Math.max(prev - 1, 0));
+  }, []);
+
+  // Snap the whole section fully into view (under the sticky navbar) the
+  // moment it starts entering the viewport, so it reads as "fixed/centered"
+  // rather than half-cut-off while the user scrolls into it.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof window === 'undefined' || window.matchMedia('(pointer: coarse)').matches) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25 && !isSnappedRef.current) {
+          isSnappedRef.current = true;
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (!entry.isIntersecting) {
+          isSnappedRef.current = false;
+        }
+      },
+      { threshold: [0, 0.25, 0.6] }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   // Scoped wheel listener: only steps inside the component when mouse is over it
@@ -104,18 +128,18 @@ export default function TechnologyExperience() {
   const activeSection = sections[activeIndex];
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className="relative min-h-[750px] w-full bg-[#070b14] py-16 text-white selection:bg-amber-400 selection:text-slate-950"
+      className="relative flex w-full scroll-mt-[108px] flex-col justify-center overflow-hidden bg-[#070b14] py-10 text-white selection:bg-amber-400 selection:text-slate-950 lg:h-[calc(100vh-108px)] lg:max-h-[860px] lg:min-h-[620px] lg:py-6"
     >
       {/* Background Glows */}
       <div className="pointer-events-none absolute -top-20 right-1/4 h-[450px] w-[450px] rounded-full bg-blue-600/10 blur-[130px]" />
       <div className="pointer-events-none absolute bottom-10 left-10 h-[400px] w-[400px] rounded-full bg-cyan-500/5 blur-[120px]" />
 
       {/* Main Content Area */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
-          
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 lg:px-12">
+        <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-12 lg:gap-8">
+
           {/* Left Column */}
           <div className="lg:col-span-5">
             <SectionContent
@@ -136,7 +160,7 @@ export default function TechnologyExperience() {
         </div>
 
         {/* Section Navigation Tabs & Arrows */}
-        <div className="mt-12">
+        <div className="mt-6 shrink-0 lg:mt-5">
           <SectionNavigation
             sections={sections}
             activeIndex={activeIndex}
