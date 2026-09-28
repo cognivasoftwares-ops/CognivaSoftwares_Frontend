@@ -1,13 +1,17 @@
 import React from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ArrowDown } from 'lucide-react';
-import { projects, impactMetrics, architectureFlow } from '../data/projects';
+import { ArrowLeft, ArrowRight, ArrowDown, ExternalLink } from 'lucide-react';
+import { impactMetrics, architectureFlow } from '../data/projects';
+import { useProjects } from '../hooks/useCatalog';
 
 export default function CaseStudyPage() {
   const { slug } = useParams();
+  const { projects, loading } = useProjects();
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
+    // Wait for the API before redirecting, in case this project only exists in the database.
+    if (loading) return <div className="min-h-[60vh] bg-white" />;
     return <Navigate to="/portfolio" replace />;
   }
 
@@ -26,6 +30,18 @@ export default function CaseStudyPage() {
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
             {project.summary}
           </p>
+
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-800"
+            >
+              Visit Live Site
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          )}
 
           {/* Metadata cards */}
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">

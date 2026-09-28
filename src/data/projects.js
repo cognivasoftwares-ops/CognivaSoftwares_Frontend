@@ -83,6 +83,102 @@ export const projects = [
       'Added audit logging across all workflow state changes',
     ],
   },
+  {
+    slug: 'oness-infra-construction-platform',
+    title: 'Oness Infra — Construction & Infrastructure Platform',
+    industry: 'Construction & Infrastructure',
+    scope: 'Corporate website, project & service management, enquiry system, CMS, careers, blog',
+    description:
+      'A corporate construction platform showcasing projects, services and certifications, built on a content-managed MERN stack.',
+    tags: ['React', 'Node.js', 'Express.js', 'MongoDB'],
+    accent: 'sky',
+    liveUrl: 'https://onessinfra.com',
+    stat1: { value: '500+', label: 'Projects Showcased' },
+    stat2: { value: 'React + Node', label: 'Core Stack' },
+    summary: 'A corporate construction platform presenting projects and services with a structured, CMS-driven enquiry pipeline.',
+    challenge:
+      'Oness Infra needed a single, credible digital presence to showcase a large project portfolio, certifications and multiple construction segments — building, industrial, residential and real estate — while giving the business team a simple way to manage projects and enquiries without engineering support.',
+    approach:
+      'We built the platform around a content-managed core so non-technical staff could update projects, services and news independently, then layered a structured enquiry flow on top so every lead captured the service type and location needed to route it correctly.',
+    solution: [
+      'Built a CMS-driven project and service catalog covering all four construction segments',
+      'Implemented a structured enquiry flow capturing service type, location and contact details',
+      'Delivered an admin panel for managing projects, careers, blog/news and testimonials',
+      'Added authentication-gated CRM access for the internal business team',
+    ],
+  },
+  {
+    slug: 'yatraa-kavach-travel-insurance-platform',
+    title: 'Yatraa Kavach — Travel Insurance Platform',
+    industry: 'Travel Insurance / InsurTech',
+    scope: 'Multi-step quote flow, plan comparison, policy management, customer data, payment-ready architecture',
+    description:
+      'A travel insurance platform guiding customers from destination selection through plan comparison to policy issuance.',
+    tags: ['React', 'Node.js', 'Express.js', 'MongoDB'],
+    accent: 'violet',
+    liveUrl: 'https://yatraakavach.com',
+    stat1: { value: '24x7', label: 'Global Assistance' },
+    stat2: { value: 'IRDAI Ready', label: 'Compliance' },
+    summary: 'A travel insurance platform turning a multi-variable decision into a guided, side-by-side plan comparison.',
+    challenge:
+      'Travel insurance decisions involve many moving parts — destination, trip dates, traveller details and plan coverage — and the client needed a guided flow that made comparing plans simple instead of overwhelming, while capturing accurate traveller data for policy generation.',
+    approach:
+      'We broke the insurance journey into a validated multi-step flow, kept plan comparison visual and side-by-side, and structured the data model so policies, quotes and traveller records stayed cleanly separated for future claims handling.',
+    solution: [
+      'Built a multi-step quote flow covering destination, trip dates and traveller details',
+      'Delivered side-by-side plan comparison across providers, coverage and premiums',
+      'Structured policy, quote and traveller data for downstream claims handling',
+      'Designed the architecture to plug into payment and notification providers',
+    ],
+  },
+  {
+    slug: 'the-bridgers-recruitment-platform',
+    title: 'The Bridgers — Recruitment & Talent Acquisition Platform',
+    industry: 'Recruitment / Talent Acquisition',
+    scope: 'Job listings, candidate applications, resume upload, recruiter workflows, applicant tracking',
+    description:
+      'A recruitment platform connecting organizations with candidates through structured job listings and applicant tracking.',
+    tags: ['React', 'Node.js', 'Express.js', 'MongoDB'],
+    accent: 'rose',
+    liveUrl: 'https://thebridgers.in',
+    stat1: { value: 'End-to-End', label: 'Hiring Pipeline' },
+    stat2: { value: 'MERN Stack', label: 'Core Stack' },
+    summary: 'A recruitment platform replacing email-based hiring coordination with structured applicant tracking.',
+    challenge:
+      'The client needed to move recruitment off manual, email-based coordination into a structured system — one where job postings, candidate applications and resumes stayed organized, and recruiters could track candidates through every stage without losing visibility.',
+    approach:
+      'We modeled the recruitment pipeline explicitly, from application through shortlisting, interviews and final decision, and built resume upload and candidate search directly into the recruiter workflow rather than bolting it on afterward.',
+    solution: [
+      'Built dynamic job listings with search and filtering by role, location and skills',
+      'Implemented a candidate application flow with resume upload and confirmation',
+      'Delivered recruiter tooling to track candidates through shortlisting and interviews',
+      'Added client and recruiter management alongside applicant tracking',
+    ],
+  },
+  {
+    slug: 'indore-institute-of-design-education-platform',
+    title: 'Indore Institute of Design — Education Platform',
+    industry: 'Education / Design Institute',
+    scope: 'Course catalog, admissions enquiries, events & workshops, student portfolio gallery, CMS',
+    description:
+      'An education platform presenting design courses, admissions and student work through a content-managed catalog.',
+    tags: ['React', 'Node.js', 'Express.js', 'MongoDB'],
+    accent: 'cyan',
+    liveUrl: 'https://indoreinstituteofdesign.com',
+    stat1: { value: 'Course-Wise', label: 'Admissions Flow' },
+    stat2: { value: 'CMS-Driven', label: 'Content Catalog' },
+    summary: 'A design-education platform keeping courses, admissions and student work current without developer involvement.',
+    challenge:
+      'Indore Institute of Design needed to present its course catalog, admissions process and student work in a way that stayed current without constant developer involvement, while making it simple for prospective students to enquire about a specific course.',
+    approach:
+      'We separated content from structure so courses, events, workshops and student projects could be managed through an admin panel, and kept the admissions enquiry form short and course-specific to reduce drop-off.',
+    solution: [
+      'Built a dynamic course catalog with eligibility, duration and curriculum detail per course',
+      'Implemented course-specific admission enquiry forms',
+      'Delivered a CMS for events, workshops, student portfolios and testimonials',
+      'Added faculty and facilities content management for the institute team',
+    ],
+  },
 ];
 
 export const impactMetrics = [

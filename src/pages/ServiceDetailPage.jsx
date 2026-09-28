@@ -12,7 +12,8 @@ import {
   ArrowRight,
   CheckCircle2,
 } from 'lucide-react';
-import { services, engagementProcess } from '../data/services';
+import { engagementProcess } from '../data/services';
+import { useServices } from '../hooks/useCatalog';
 
 const iconMap = { Globe, Smartphone, Code2, Building2, Palette, Cloud };
 
@@ -27,9 +28,12 @@ const accentMap = {
 
 export default function ServiceDetailPage() {
   const { slug } = useParams();
+  const { services, loading } = useServices();
   const service = services.find((s) => s.slug === slug);
 
   if (!service) {
+    // Wait for the API before redirecting, in case this service only exists in the database.
+    if (loading) return <div className="min-h-[60vh] bg-white" />;
     return <Navigate to="/services" replace />;
   }
 

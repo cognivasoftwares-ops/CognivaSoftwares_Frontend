@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Globe, Smartphone, Code2, Building2, Palette, Cloud, ArrowRight } from 'lucide-react';
-import { services, engagementProcess } from '../data/services';
+import { engagementProcess } from '../data/services';
+import { useServices } from '../hooks/useCatalog';
 
 const iconMap = { Globe, Smartphone, Code2, Building2, Palette, Cloud };
 
@@ -105,6 +106,8 @@ function ServiceCard({ service, index }) {
 }
 
 function ServicesGridSection() {
+  const { services } = useServices();
+
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">

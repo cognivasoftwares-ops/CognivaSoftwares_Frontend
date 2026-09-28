@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, Globe, MessageCircle, Rss, ArrowUpRight } from 'lucide-react';
-import { services } from '../../data/services';
+import { useServices } from '../../hooks/useCatalog';
 
 const quickLinks = [
   { label: 'Home', path: '/' },
@@ -40,6 +40,7 @@ function FooterColumn({ title, children }) {
 }
 
 export default function Footer() {
+  const { services } = useServices();
   return (
     <footer className="border-t border-white/10 bg-slate-950 text-slate-400">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">

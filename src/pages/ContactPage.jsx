@@ -12,7 +12,10 @@ import {
   Globe,
   MessageCircle,
   Rss,
+  AlertCircle,
 } from 'lucide-react';
+import { submitContactEnquiry } from '../api/cogniva';
+import { parseApiError } from '../api/client';
 
 const contactDetails = [
   {
@@ -142,17 +145,56 @@ function ContactInfoCards() {
   );
 }
 
+const initialForm = {
+  fullName: '',
+  email: '',
+  phone: '',
+  company: '',
+  projectType: '',
+  message: '',
+  website: '', // honeypot - hidden from real users
+};
+
+function FieldError({ message }) {
+  if (!message) return null;
+  return <p className="mt-1.5 text-xs font-medium text-rose-600">{message}</p>;
+}
+
 function ContactForm() {
+  const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const updateField = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    setError('');
+    setFieldErrors({});
+    try {
+      await submitContactEnquiry({
+        ...form,
+        phone: form.phone.trim() || null,
+        company: form.company.trim() || null,
+      });
       setSubmitted(true);
-    }, 900);
+      setForm(initialForm);
+    } catch (err) {
+      const parsed = parseApiError(err);
+      setError(parsed.message);
+      setFieldErrors(parsed.fieldErrors);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -188,33 +230,55 @@ function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm sm:p-10"
+      className="relative rounded-3xl border border-slate-100 bg-white p-8 shadow-sm sm:p-10"
     >
       <h2 className="text-2xl font-black tracking-tight text-slate-900">Start a Conversation</h2>
       <p className="mt-2 text-sm text-slate-500">Fill in a few details and we'll take it from there.</p>
 
+      {error && (
+        <div
+          role="alert"
+          className="mt-6 flex items-start gap-2 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700"
+        >
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>{error}</span>
+        </div>
+      )}
+
+      {/* Honeypot: visually hidden, bots tend to fill every field */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label>
+          Website
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={updateField} />
+        </label>
+      </div>
+
       <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Full Name</label>
-          <input required type="text" placeholder="Jane Doe" className={fieldClasses()} />
+          <label htmlFor="fullName" className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Full Name</label>
+          <input id="fullName" name="fullName" required maxLength={120} type="text" placeholder="Jane Doe" value={form.fullName} onChange={updateField} className={fieldClasses()} />
+          <FieldError message={fieldErrors.fullName} />
         </div>
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Work Email</label>
-          <input required type="email" placeholder="jane@company.com" className={fieldClasses()} />
+          <label htmlFor="email" className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Work Email</label>
+          <input id="email" name="email" required maxLength={160} type="email" placeholder="jane@company.com" value={form.email} onChange={updateField} className={fieldClasses()} />
+          <FieldError message={fieldErrors.email} />
         </div>
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Phone Number</label>
-          <input type="tel" placeholder="+91 00000 00000" className={fieldClasses()} />
+          <label htmlFor="phone" className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Phone Number</label>
+          <input id="phone" name="phone" maxLength={30} type="tel" placeholder="+91 00000 00000" value={form.phone} onChange={updateField} className={fieldClasses()} />
+          <FieldError message={fieldErrors.phone} />
         </div>
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Company</label>
-          <input type="text" placeholder="Company name" className={fieldClasses()} />
+          <label htmlFor="company" className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Company</label>
+          <input id="company" name="company" maxLength={160} type="text" placeholder="Company name" value={form.company} onChange={updateField} className={fieldClasses()} />
+          <FieldError message={fieldErrors.company} />
         </div>
 
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Project Type</label>
+          <label htmlFor="projectType" className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">Project Type</label>
           <div className="relative">
-            <select required defaultValue="" className={`${fieldClasses()} appearance-none pr-10`}>
+            <select id="projectType" name="projectType" required value={form.projectType} onChange={updateField} className={`${fieldClasses()} appearance-none pr-10`}>
               <option value="" disabled>
                 Select a project type
               </option>
@@ -226,18 +290,26 @@ function ContactForm() {
             </select>
             <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           </div>
+          <FieldError message={fieldErrors.projectType} />
         </div>
 
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">
+          <label htmlFor="message" className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-slate-500">
             Tell us about your project
           </label>
           <textarea
+            id="message"
+            name="message"
             required
+            minLength={10}
+            maxLength={5000}
             rows={5}
             placeholder="What are you building, and what problem are you trying to solve?"
+            value={form.message}
+            onChange={updateField}
             className={fieldClasses()}
           />
+          <FieldError message={fieldErrors.message} />
         </div>
       </div>
 
